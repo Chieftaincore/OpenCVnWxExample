@@ -38,7 +38,6 @@ int FrontalFaceDetCamera() {
     Mat matris;
 
     casd.load("haarcascade_frontalface_default.xml");
-    cv:Vec2b yuzler;
 
     std::vector<cv::Rect> faces;
 
