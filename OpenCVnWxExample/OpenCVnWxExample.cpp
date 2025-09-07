@@ -9,47 +9,78 @@
 using namespace cv;
 
 int FrontalFaceDetCamera();
-int imgshow();
+int ProfileFaceDetCamera();
+int UpperBodyDetCamera();
+char HaarDetectionCamera();
 
 int main()
 {
-    FrontalFaceDetCamera();
+    HaarDetectionCamera();
+ 
 }
-
-int imgShow() {
-    cv::Mat img = cv::imread("D:/My_OpenCV/Morph/cicek.jpg");
-    namedWindow("First OpenCV Application", WINDOW_AUTOSIZE);
-    cv::imshow("First OpenCV Application", img);
-    cv::moveWindow("First OpenCV Application", 0, 45);
-    cv::waitKey(0);
-    cv::destroyAllWindows();
-    return 0;
-}
-
 
 /// <summary>
-/// BasicExample of FrontalFaceDetection
+/// ENG For Testing separeta HaarClass XML's on the live camera
+/// TUR Ayrı HaarDetection sınıfları ve XML dosyalarını canlı Kamerada test etmek içind
 /// </summary>
 /// <returns></returns>
-int FrontalFaceDetCamera() {
+char HaarDetectionCamera() {
+
+    cv::Scalar renkdegeri;
+
+    std::cout << "Modlar :: [F] Front Face Detection \n";
+    std::cout << "[P] Profil Face Detection \n";
+
+    std::string Girdi;
+    char Mode;
+
+    std::cout << "Mod seciniz :: ";
+    std::cin >> Girdi;
+
+    Mode = Girdi[0];
 
     VideoCapture vid(0);
     CascadeClassifier casd;
     Mat matris;
 
-    casd.load("haarcascade_frontalface_default.xml");
+    switch (Mode) {
+    case 'F':
+        casd.load("haarcascade_frontalface_default.xml");
+        renkdegeri = Scalar(50, 90, 255);
+        break;
+    case 'P':
+        casd.load("haarcascade_profileface.xml");
+        renkdegeri = Scalar(155, 90, 255);
 
-    std::vector<cv::Rect> faces;
+        break;
+    case 'U':
+        casd.load("haarcascade_upperbody.xml");
+        renkdegeri = Scalar(144, 90, 255);
+
+        break;
+    default:
+        std::cout << "Geçersiz Karakter";
+        break;
+    }
+
+    std::vector<cv::Rect> detObject;
 
     while (true) {
         vid.read(matris);
-        casd.detectMultiScale(matris, faces, 1.3, 5);
 
-        for (int i = 0; i < faces.size(); i++) {
-            rectangle(matris, faces[i].tl(), faces[i].br(), Scalar(50, 90, 190), 3);
+        casd.detectMultiScale(matris, detObject, 1.1, 5);
+
+        for (int i = 0; i < detObject.size(); i++) {
+            rectangle(matris, detObject[i].tl(), detObject[i].br(), renkdegeri, 3);
         }
+
+        putText(matris, "Yuzler : " + std::to_string(detObject.size()) + "?", cv::Point(10, 70), QT_FONT_NORMAL | FONT_ITALIC, 1,
+            Scalar(255, 255, 255), 1);
 
         imshow("Kamera", matris);
         waitKey(25);
     }
+
+    return NULL;
 }
+
