@@ -1,1 +1,0 @@
-///Ekstra Yüz Tanýmlama Sýnýflarý ve Metotlar buraya atýlacak

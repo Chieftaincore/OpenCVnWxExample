@@ -1,23 +1,40 @@
-﻿
-
-#include <opencv2/core.hpp>
+﻿#include <opencv2/core.hpp>
 #include <opencv2/objdetect.hpp>
 #include <opencv2/imgproc.hpp>
 #include <opencv2/imgcodecs.hpp>
 #include <opencv2/highgui.hpp>
 #include <iostream>
+
+#include <wx/wx.h>
+
 using namespace cv;
 
-int FrontalFaceDetCamera();
-int ProfileFaceDetCamera();
-int UpperBodyDetCamera();
 char HaarDetectionCamera();
 
-int main()
-{
-    HaarDetectionCamera();
- 
-}
+class App : public wxApp {
+
+    bool OnInit() {
+
+
+        wxFrame* window = new wxFrame(NULL, wxID_ANY, "GUI wx", wxDefaultPosition, wxSize(600, 800));
+        wxBoxSizer* sizer = new wxBoxSizer(wxHORIZONTAL);
+        wxStaticText* text = new wxStaticText(window, wxID_ANY, "O_O it finally works", wxDefaultPosition, wxDefaultSize, wxALIGN_CENTRE_HORIZONTAL);
+
+        text->SetFont(wxFont(20,wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_BOLD));
+        sizer->Add(text,1, wxALIGN_CENTER);
+
+        window->SetSizer(sizer);
+        window->Show();
+
+        return true;
+
+    }
+
+
+};
+
+wxIMPLEMENT_APP(App);
+
 
 /// <summary>
 /// ENG For Testing separeta HaarClass XML's on the live camera
@@ -45,16 +62,16 @@ char HaarDetectionCamera() {
 
     switch (Mode) {
     case 'F':
-        casd.load("haarcascade_frontalface_default.xml");
+        casd.load("CascadeXMLs/haarcascade_frontalface_default.xml");
         renkdegeri = Scalar(50, 90, 255);
         break;
     case 'P':
-        casd.load("haarcascade_profileface.xml");
+        casd.load("CascadeXMLs/haarcascade_profileface.xml");
         renkdegeri = Scalar(155, 90, 255);
 
         break;
     case 'U':
-        casd.load("haarcascade_upperbody.xml");
+        casd.load("CascadeXMLs/haarcascade_upperbody.xml");
         renkdegeri = Scalar(144, 90, 255);
 
         break;

@@ -18,8 +18,11 @@
     <ClCompile Include="OpenCVnWxExample.cpp">
       <Filter>Kaynak Dosyalar</Filter>
     </ClCompile>
-    <ClCompile Include="FaceDetection.cpp">
-      <Filter>Kaynak Dosyalar</Filter>
-    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Xml Include="CascadeXMLs\haarcascade_upperbody.xml" />
+    <Xml Include="CascadeXMLs\haarcascade_frontalface_default.xml" />
+    <Xml Include="CascadeXMLs\haarcascade_profileface.xml" />
+    <Xml Include="CascadeXMLs\haarcascade_fullbody.xml" />
   </ItemGroup>
 </Project>
