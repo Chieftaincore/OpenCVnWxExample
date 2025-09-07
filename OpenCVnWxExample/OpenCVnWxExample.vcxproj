@@ -132,13 +132,18 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="OpenCVnWxExample.cpp" />
+    <ClCompile Include="App.cpp" />
+    <ClCompile Include="wxgui\MainFrame.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Xml Include="CascadeXMLs\haarcascade_frontalface_default.xml" />
     <Xml Include="CascadeXMLs\haarcascade_fullbody.xml" />
     <Xml Include="CascadeXMLs\haarcascade_profileface.xml" />
     <Xml Include="CascadeXMLs\haarcascade_upperbody.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="App.h" />
+    <ClInclude Include="wxgui\MainFrame.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

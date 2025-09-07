@@ -1,4 +1,6 @@
-ï»¿#include <opencv2/core.hpp>
+#include "MainFrame.h"
+#include <wx/wx.h>
+#include <opencv2/core.hpp>
 #include <opencv2/objdetect.hpp>
 #include <opencv2/imgproc.hpp>
 #include <opencv2/imgcodecs.hpp>
@@ -9,50 +11,23 @@
 
 using namespace cv;
 
-char HaarDetectionCamera();
-
-class App : public wxApp {
-
-    bool OnInit() {
-
-
-        wxFrame* window = new wxFrame(NULL, wxID_ANY, "GUI wx", wxDefaultPosition, wxSize(600, 800));
-        wxBoxSizer* sizer = new wxBoxSizer(wxHORIZONTAL);
-        wxStaticText* text = new wxStaticText(window, wxID_ANY, "O_O it finally works", wxDefaultPosition, wxDefaultSize, wxALIGN_CENTRE_HORIZONTAL);
-
-        text->SetFont(wxFont(20,wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_BOLD));
-        sizer->Add(text,1, wxALIGN_CENTER);
-
-        window->SetSizer(sizer);
-        window->Show();
-
-        return true;
-
-    }
-
-
-};
-
-wxIMPLEMENT_APP(App);
-
-
 /// <summary>
 /// ENG For Testing separeta HaarClass XML's on the live camera
-/// TUR AyrÄ± HaarDetection sÄ±nÄ±flarÄ± ve XML dosyalarÄ±nÄ± canlÄ± Kamerada test etmek iÃ§ind
+/// TUR Ayrý HaarDetection sýnýflarý ve XML dosyalarýný canlý Kamerada test etmek içind
 /// </summary>
 /// <returns></returns>
 char HaarDetectionCamera() {
 
     cv::Scalar renkdegeri;
 
-    std::cout << "Modlar :: [F] Front Face Detection \n";
-    std::cout << "[P] Profil Face Detection \n";
+    //std::cout << "Modlar :: [F] Front Face Detection \n";
+    //std::cout << "[P] Profil Face Detection \n";
 
     std::string Girdi;
     char Mode;
 
-    std::cout << "Mod seciniz :: ";
-    std::cin >> Girdi;
+    //std::cout << "Mod seciniz :: ";
+    Girdi = 'F';
 
     Mode = Girdi[0];
 
@@ -76,7 +51,7 @@ char HaarDetectionCamera() {
 
         break;
     default:
-        std::cout << "GeÃ§ersiz Karakter";
+        std::cout << "Geçersiz Karakter";
         break;
     }
 
@@ -101,3 +76,36 @@ char HaarDetectionCamera() {
     return NULL;
 }
 
+enum customIDs {
+	Button_ID = 2,
+};
+
+wxBEGIN_EVENT_TABLE(MainFrame, wxFrame)
+	EVT_BUTTON(Button_ID, MainFrame::OnButtonClicked)
+wxEND_EVENT_TABLE()
+
+
+/// <summary>
+/// App MainFrame 
+/// </summary>
+MainFrame::MainFrame(const wxString& title) : wxFrame(nullptr, wxID_ANY, title) {
+
+	wxBoxSizer* sizer = new wxBoxSizer(wxHORIZONTAL);
+	wxStaticText* text = new wxStaticText(this, wxID_ANY, "O_O it finally works", wxDefaultPosition, wxDefaultSize, wxALIGN_CENTRE_HORIZONTAL);
+
+	wxButton* button = new wxButton(this, Button_ID, "Haar Detection");
+
+	text->SetFont(wxFont(20, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_BOLD));
+
+	sizer->Add(button, 1, wxALIGN_LEFT, 10);
+	sizer->Add(text, 1, wxALIGN_CENTER);
+	this->SetSizer(sizer);
+
+	CreateStatusBar();
+
+	this->Show();
+}
+
+void MainFrame::OnButtonClicked(wxCommandEvent& evt) {
+    HaarDetectionCamera();
+}

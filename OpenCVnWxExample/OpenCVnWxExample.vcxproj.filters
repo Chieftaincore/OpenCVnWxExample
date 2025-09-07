@@ -15,7 +15,10 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="OpenCVnWxExample.cpp">
+    <ClCompile Include="wxgui\MainFrame.cpp">
+      <Filter>Kaynak Dosyalar</Filter>
+    </ClCompile>
+    <ClCompile Include="App.cpp">
       <Filter>Kaynak Dosyalar</Filter>
     </ClCompile>
   </ItemGroup>
@@ -24,5 +27,13 @@
     <Xml Include="CascadeXMLs\haarcascade_frontalface_default.xml" />
     <Xml Include="CascadeXMLs\haarcascade_profileface.xml" />
     <Xml Include="CascadeXMLs\haarcascade_fullbody.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="wxgui\MainFrame.h">
+      <Filter>Üst Bilgi Dosyaları</Filter>
+    </ClInclude>
+    <ClInclude Include="App.h">
+      <Filter>Üst Bilgi Dosyaları</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
